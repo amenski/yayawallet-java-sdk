@@ -7,5 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="fasterxml.jackson.core.databind" level="project" />
+    <orderEntry type="library" exported="" name="fasterxml.jackson.xml.databind" level="project" />
+    <orderEntry type="library" exported="" name="google.code.gson" level="project" />
+    <orderEntry type="library" exported="" name="fasterxml.jackson.core.annotations" level="project" />
+    <orderEntry type="library" exported="" name="konghq.unirest.objectmapper.jackson" level="project" />
   </component>
 </module>
