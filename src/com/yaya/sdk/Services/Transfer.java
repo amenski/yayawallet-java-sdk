@@ -1,8 +1,8 @@
-package Services;
+package com.yaya.sdk.Services;
 
-import ApiRequest.ApiClient;
-import Models.ExternalAccount;
-import Models.Fee;
+import com.yaya.sdk.ApiRequest.ApiClient;
+import com.yaya.sdk.Models.ExternalAccount;
+import com.yaya.sdk.Models.Fee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -23,9 +23,9 @@ public class Transfer {
         this.apiClient = apiClient;
     }
 
-    public Models.Transfer[] getTransferList() throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+    public com.yaya.sdk.Models.Transfer[] getTransferList() throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
         HttpResponse<String> response = apiClient.apiRequest("GET", "/transfer/", "", null);
-        Models.Transfer[] transfers = objectMapper.readValue(response.body(), Models.Transfer[].class);
+        com.yaya.sdk.Models.Transfer[] transfers = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Transfer[].class);
         return transfers;
     }
 

@@ -1,9 +1,9 @@
-package Services;
+package com.yaya.sdk.Services;
 
-import ApiRequest.ApiClient;
-import Models.Fee;
-import Models.QR;
-import Models.TransactionList;
+import com.yaya.sdk.ApiRequest.ApiClient;
+import com.yaya.sdk.Models.Fee;
+import com.yaya.sdk.Models.QR;
+import com.yaya.sdk.Models.TransactionList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -22,6 +22,12 @@ public class Transaction {
     public Transaction(ApiClient apiClient) {
         this.objectMapper = new ObjectMapper();
         this.apiClient = apiClient;
+    }
+
+    public TransactionList getTransactionListByUser(String param) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+        HttpResponse<String> response = apiClient.apiRequest("GET", "/transaction/find-by-user", param, null);
+        TransactionList transactions = objectMapper.readValue(response.body(), TransactionList.class);
+        return transactions;
     }
 
     public TransactionList getTransactionListByUser() throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {

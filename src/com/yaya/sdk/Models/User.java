@@ -1,4 +1,4 @@
-package Models;
+package com.yaya.sdk.Models;
 
 public class User {
     private String name;

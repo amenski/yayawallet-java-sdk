@@ -1,17 +1,15 @@
-package Models;
+package com.yaya.sdk.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.yaya.sdk.Models.Institution;
 
-public class ExternalAccount {
+public class PaymentMethod {
 
     private Institution institution;
     @JsonProperty("full_name")
     private String fullName;
     @JsonProperty("account_number")
     private String accountNumber;
-    private String phone;
-    @JsonProperty("photo_url")
-    private String photoUrl;
 
     public Institution getInstitution() {
         return institution;
@@ -35,21 +33,5 @@ public class ExternalAccount {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
     }
 }

@@ -1,4 +1,4 @@
-package Models;
+package com.yaya.sdk.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

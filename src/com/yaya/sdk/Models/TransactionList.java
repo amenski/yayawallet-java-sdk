@@ -1,4 +1,6 @@
-package Models;
+package com.yaya.sdk.Models;
+
+import com.yaya.sdk.Models.Transaction;
 
 public class TransactionList {
 

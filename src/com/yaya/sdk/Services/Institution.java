@@ -1,6 +1,6 @@
-package Services;
+package com.yaya.sdk.Services;
 
-import ApiRequest.ApiClient;
+import com.yaya.sdk.ApiRequest.ApiClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -21,11 +21,11 @@ public class Institution {
         this.apiClient = apiClient;
     }
 
-    public Models.Institution[] listInstitution(String country) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+    public com.yaya.sdk.Models.Institution[] listInstitution(String country) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
         Map<String, Object> payload = new HashMap<>();
         payload.put("country", country);
         HttpResponse<String> response = apiClient.apiRequest("POST", "/financial-institution/list", "", payload);
-        Models.Institution[] institutions = objectMapper.readValue(response.body(), Models.Institution[].class);
+        com.yaya.sdk.Models.Institution[] institutions = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Institution[].class);
         return institutions;
     }
 }

@@ -1,4 +1,4 @@
-package ApiRequest;
+package com.yaya.sdk.ApiRequest;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -9,7 +9,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-import Models.Time;
+import com.yaya.sdk.Models.Time;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.crypto.Mac;
@@ -17,10 +17,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class ApiClient {
 
-    private static final String API_URL = System.getenv("API_URL");
-    private static final String API_PATH = System.getenv("API_PATH");
-    private static final String API_KEY = System.getenv("API_KEY");
-    private static final String API_SECRET = System.getenv("API_SECRET");
+    private static final String API_URL = System.getenv("YAYA_API_URL");
+    private static final String API_PATH = System.getenv("YAYA_API_PATH");
+    private static final String API_KEY = System.getenv("YAYA_API_KEY");
+    private static final String API_SECRET = System.getenv("YAYA_API_SECRET");
 
     private final ObjectMapper objectMapper;
     private final HttpClient httpClient;
