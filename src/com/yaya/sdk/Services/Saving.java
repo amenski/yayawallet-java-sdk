@@ -39,9 +39,9 @@ public class Saving {
         return saving;
     }
 
-    public com.yaya.sdk.Models.Saving[] withdrawSaving() throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+    public com.yaya.sdk.Models.Withdrawal[] withdrawals() throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
         HttpResponse<String> response = apiClient.apiRequest("GET", "/saving/withdrawals", "", null);
-        com.yaya.sdk.Models.Saving[] savings = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Saving[].class);
-        return savings;
+        com.yaya.sdk.Models.Withdrawal[] withdrawals = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Withdrawal[].class);
+        return withdrawals;
     }
 }
