@@ -8,5 +8,4 @@ out/production/yayawallet-java-sdk
 src/main/java/com/yaya/sdk/Main.java
 
 #gradle
-gradle
 .gradle
