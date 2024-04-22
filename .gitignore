@@ -5,7 +5,7 @@
 out/production/yayawallet-java-sdk
 
 #Main
-src/Main.java
+src/main/java/com/yaya/sdk/Main.java
 
 #gradle
 gradle
