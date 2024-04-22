@@ -1,5 +1,18 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'org.example'
+            artifactId = 'library'
+            version = '1.0-SNAPSHOT'
+
+            from components.java
+        }
+    }
 }
 
 group 'org.example'
