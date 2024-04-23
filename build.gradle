@@ -5,10 +5,10 @@ plugins {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
             groupId = 'org.example'
-            artifactId = 'library'
-            version = '1.0-SNAPSHOT'
+            artifactId = 'yayawallet-java-sdk'
+            version = '0.1.5'
 
             from components.java
         }
@@ -16,7 +16,7 @@ publishing {
 }
 
 group 'org.example'
-version '1.0-SNAPSHOT'
+version '0.1.5'
 
 repositories {
     mavenCentral()

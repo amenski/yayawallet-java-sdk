@@ -9,3 +9,6 @@ src/main/java/com/yaya/sdk/Main.java
 
 #gradle
 .gradle
+
+#build
+build
