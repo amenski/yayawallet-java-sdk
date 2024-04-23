@@ -6,9 +6,9 @@ plugins {
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId = 'org.example'
+            groupId = 'com.github.ermiyas111'
             artifactId = 'yayawallet-java-sdk'
-            version = '0.1.5'
+            version = '0.1.6'
 
             from components.java
         }
@@ -16,7 +16,7 @@ publishing {
 }
 
 group 'org.example'
-version '0.1.5'
+version '0.1.6'
 
 repositories {
     mavenCentral()
