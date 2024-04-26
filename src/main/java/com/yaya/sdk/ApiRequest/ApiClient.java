@@ -11,16 +11,18 @@ import java.util.*;
 
 import com.yaya.sdk.Models.Time;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 public class ApiClient {
 
-    private static final String API_URL = System.getenv("YAYA_API_URL");
-    private static final String API_PATH = System.getenv("YAYA_API_PATH");
-    private static final String API_KEY = System.getenv("YAYA_API_KEY");
-    private static final String API_SECRET = System.getenv("YAYA_API_SECRET");
+    Dotenv dotenv = Dotenv.load();
+    private String API_URL = dotenv.get("YAYA_API_URL");
+    private String API_PATH = dotenv.get("YAYA_API_PATH");
+    private String API_KEY = dotenv.get("YAYA_API_KEY");
+    private String API_SECRET = dotenv.get("YAYA_API_SECRET");
 
     private final ObjectMapper objectMapper;
     private final HttpClient httpClient;
