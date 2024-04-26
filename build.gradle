@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'maven-publish'
 
 group 'com.github.yayawallet'
-version '0.1.2'
+version '0.1.3'
 
 publishing {
     publications {
@@ -10,7 +10,7 @@ publishing {
 
             groupId = 'com.github.yayawallet'
             artifactId = 'yayawallet-java-sdk'
-            version = '0.1.2'
+            version = '0.1.3'
 
             from components.java
 

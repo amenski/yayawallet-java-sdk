@@ -31,6 +31,7 @@ public class Profile {
 
     private String status;
 
+    @JsonProperty("photo_url")
     private String photoUrl;
 
     @JsonProperty("id_doc_front_url")
