@@ -1,26 +1,25 @@
-plugins {
-    id 'java'
-    id 'maven-publish'
-}
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+group 'com.github.yayawallet'
+version '0.1.1'
 
 publishing {
     publications {
-        maven(MavenPublication) {
-            groupId = 'com.github.ermiyas111'
+        release(MavenPublication) {
+
+            groupId = 'com.github.yayawallet'
             artifactId = 'yayawallet-java-sdk'
-            version = '0.1.6'
+            version = '0.1.1'
 
             from components.java
+
         }
     }
 }
 
-group 'org.example'
-version '0.1.6'
-
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
