@@ -1,0 +1,14 @@
+# Default ignored files
+.idea
+
+# prod
+out/production/yayawallet-java-sdk
+
+#Main
+src/main/java/com/yaya/sdk/Main.java
+
+#gradle
+.gradle
+
+#build
+build

@@ -1,0 +1,33 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+group 'com.github.yayawallet'
+version '0.1.4'
+
+publishing {
+    publications {
+        release(MavenPublication) {
+
+            groupId = 'com.github.yayawallet'
+            artifactId = 'yayawallet-java-sdk'
+            version = '0.1.4'
+
+            from components.java
+
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+}
+
+test {
+    useJUnitPlatform()
+}
