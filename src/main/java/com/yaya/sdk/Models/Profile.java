@@ -49,19 +49,19 @@ public class Profile {
     private int reputation;
 
     @JsonProperty("date_of_birth")
-    private int dateOfBirth;
+    private long dateOfBirth;
 
     @JsonProperty("created_at_time")
-    private int createdAtTime;
+    private long createdAtTime;
 
     @JsonProperty("cause_label")
     private String causeLabel;
 
     @JsonProperty("balance_limit")
-    private int balanceLimit;
+    private double balanceLimit;
 
     @JsonProperty("daily_transaction_limit")
-    private int dailyTransactionLimit;
+    private double dailyTransactionLimit;
 
     private String fin;
 
@@ -228,19 +228,19 @@ public class Profile {
         this.reputation = reputation;
     }
 
-    public int getDateOfBirth() {
+    public long getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(int dateOfBirth) {
+    public void setDateOfBirth(long dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getCreatedAtTime() {
+    public long getCreatedAtTime() {
         return createdAtTime;
     }
 
-    public void setCreatedAtTime(int createdAtTime) {
+    public void setCreatedAtTime(long createdAtTime) {
         this.createdAtTime = createdAtTime;
     }
 
@@ -252,19 +252,19 @@ public class Profile {
         this.causeLabel = causeLabel;
     }
 
-    public int getBalanceLimit() {
+    public double getBalanceLimit() {
         return balanceLimit;
     }
 
-    public void setBalanceLimit(int balanceLimit) {
+    public void setBalanceLimit(double balanceLimit) {
         this.balanceLimit = balanceLimit;
     }
 
-    public int getDailyTransactionLimit() {
+    public double getDailyTransactionLimit() {
         return dailyTransactionLimit;
     }
 
-    public void setDailyTransactionLimit(int dailyTransactionLimit) {
+    public void setDailyTransactionLimit(double dailyTransactionLimit) {
         this.dailyTransactionLimit = dailyTransactionLimit;
     }
 
