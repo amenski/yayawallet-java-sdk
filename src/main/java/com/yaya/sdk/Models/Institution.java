@@ -8,7 +8,6 @@ public class Institution {
     private String institutionID;
     private String code;
     private String name;
-    private Country country;
     @JsonProperty("logo_url")
     private String logoUrl;
 
@@ -42,14 +41,6 @@ public class Institution {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
     }
 
     public String getLogoUrl() {
