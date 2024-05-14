@@ -1,4 +1,4 @@
-# yaya-java-sdk
+# yayawallet-java-sdk
 This is a Java SDK package for handling API integration on merchant application.
 
 # Installation

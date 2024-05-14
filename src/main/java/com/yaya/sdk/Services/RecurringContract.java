@@ -40,7 +40,7 @@ public class RecurringContract {
         payload.put("cause", cause);
         payload.put("notification_url", notificationUrl);
         payload.put("meta_data", metaData);
-        HttpResponse<String> response = apiClient.apiRequest("POST", "/equb/create", "", payload);
+        HttpResponse<String> response = apiClient.apiRequest("POST", "/recurring-contract/request-payment", "", payload);
         PaymentRequestAltered paymentRequest = objectMapper.readValue(response.body(), PaymentRequestAltered.class);
         return paymentRequest;
     }
@@ -76,7 +76,7 @@ public class RecurringContract {
     }
 
     public Contract deactivateSubscription(String ID) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
-        HttpResponse<String> response = apiClient.apiRequest("GET", "/recurring-contract/deactivate" + ID, "", null);
+        HttpResponse<String> response = apiClient.apiRequest("GET", "/recurring-contract/deactivate/" + ID, "", null);
         Contract contract = objectMapper.readValue(response.body(), Contract.class);
         return contract;
     }
