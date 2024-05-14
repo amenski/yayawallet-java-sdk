@@ -3,6 +3,7 @@ package com.yaya.sdk.Models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Institution {
+    private String id;
     @JsonProperty("institution_id")
     private String institutionID;
     private String code;
@@ -10,6 +11,14 @@ public class Institution {
     private Country country;
     @JsonProperty("logo_url")
     private String logoUrl;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getInstitutionID() {
         return institutionID;

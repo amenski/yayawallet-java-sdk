@@ -76,7 +76,7 @@ public class RecurringContract {
     }
 
     public Contract deactivateSubscription(String ID) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
-        HttpResponse<String> response = apiClient.apiRequest("GET", "/recurring-contract/deactivate" + ID, "", null);
+        HttpResponse<String> response = apiClient.apiRequest("GET", "/recurring-contract/deactivate/" + ID, "", null);
         Contract contract = objectMapper.readValue(response.body(), Contract.class);
         return contract;
     }
