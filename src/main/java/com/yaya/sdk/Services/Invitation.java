@@ -37,4 +37,28 @@ public class Invitation {
         com.yaya.sdk.Models.Invitation invitation = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Invitation.class);
         return invitation;
     }
+
+    public com.yaya.sdk.Models.Invitation verifyInvitation(String inviteHash) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("invite_hash", inviteHash);
+        HttpResponse<String> response = apiClient.apiRequest("POST", "/invitation/find-by-hash", "", payload);
+        com.yaya.sdk.Models.Invitation invitation = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Invitation.class);
+        return invitation;
+    }
+
+    public com.yaya.sdk.Models.Invitation cancelInvitation(String inviteHash) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+        HttpResponse<String> response = apiClient.apiRequest("DELETE", "/invitation/cancel/" + inviteHash, "", null);
+        com.yaya.sdk.Models.Invitation invitation = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Invitation.class);
+        return invitation;
+    }
+
+    public com.yaya.sdk.Models.Invitation getOtp(String country, String phone, String inviteHash) throws IOException, InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeyException {
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("country", country);
+        payload.put("phone", phone);
+        payload.put("invite_hash", inviteHash);
+        HttpResponse<String> response = apiClient.apiRequest("POST", "invitation/otp", "", payload);
+        com.yaya.sdk.Models.Invitation invitation = objectMapper.readValue(response.body(), com.yaya.sdk.Models.Invitation.class);
+        return invitation;
+    }
 }
