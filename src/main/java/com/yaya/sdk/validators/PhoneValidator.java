@@ -92,4 +92,8 @@ public class PhoneValidator {
         }
         return "";
     }
+
+    private PhoneValidator() {
+        //
+    }
 }

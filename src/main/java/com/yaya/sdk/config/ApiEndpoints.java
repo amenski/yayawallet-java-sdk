@@ -12,6 +12,8 @@ public final class ApiEndpoints {
     public static final String BILL_LIST = "/bill/list";
     public static final String BILL_FIND = "/bill/find";
 
+    public static final String INSTITUTION_LIST = "/institutions/list";
+
     private ApiEndpoints() {
     }
 }
