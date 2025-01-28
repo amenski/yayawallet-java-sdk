@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yaya.sdk.config.ApiConfig;
 import com.yaya.sdk.config.ErrorResponse;
-import com.yaya.sdk.exceptions.AirtimeServiceException;
 import com.yaya.sdk.exceptions.ApiException;
 import com.yaya.sdk.models.Time;
 
