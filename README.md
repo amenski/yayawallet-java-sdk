@@ -23,10 +23,10 @@ You can find the last two credentials on https://yayawallet.com/en/profile/setti
 This sdk provides functions that will call different apis available on YaYa's system. Here is how you can call ```getTransactionListByUser``` function:
 ```
 import com.yaya.sdk.ApiRequest.ApiClient;
-import com.yaya.sdk.Services.Transaction;
+import com.yaya.sdk.services.Transaction;
 
 @GetMapping("/find-by-user")
-public com.yaya.sdk.Models.TransactionList getTransactionListByUser() throws IOException, NoSuchAlgorithmException, ExecutionException, InvalidKeyException, InterruptedException {
+public com.yaya.sdk.models.TransactionList getTransactionListByUser() throws IOException, NoSuchAlgorithmException, ExecutionException, InvalidKeyException, InterruptedException {
     ApiClient apiClient = new ApiClient();
     Transaction transaction = new Transaction(apiClient);
     return transaction.getTransactionListByUser();
