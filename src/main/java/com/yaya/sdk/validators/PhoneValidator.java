@@ -1,5 +1,7 @@
 package com.yaya.sdk.validators;
 
+import com.yaya.sdk.exceptions.SdkException;
+import com.yaya.sdk.exceptions.SdkExceptionSupplier;
 import com.yaya.sdk.util.StringUtils;
 
 import java.util.regex.Pattern;
@@ -11,9 +13,11 @@ import java.util.regex.Pattern;
  * - 0912345678, 0712345678
  */
 public class PhoneValidator {
-    private static final Pattern ETH_PHONE_PATTERN = Pattern.compile(
-            "^(\\+251|251|0)([7|9][0-9]{8})$"
-    );
+    private static final Pattern ETH_PHONE_PATTERN = Pattern.compile("^(\\+251|251|0)?[79]\\d{8}$");
+
+    private PhoneValidator() {
+        //
+    }
 
     public static boolean isValid(final String phone) {
         if (StringUtils.isBlank(phone)) {
@@ -24,6 +28,10 @@ public class PhoneValidator {
         return ETH_PHONE_PATTERN.matcher(normalizedNumber).matches();
     }
 
+    public static boolean isNotValid(String phone) {
+        return !isValid(phone);
+    }
+
     /**
      * Formats the phone number to standard format (+251).
      *
@@ -32,7 +40,7 @@ public class PhoneValidator {
      * @throws IllegalArgumentException if the phone number is invalid
      */
     public static String format(final String phone) {
-        if (!isValid(phone)) {
+        if (isNotValid(phone)) {
             throw new IllegalArgumentException("Invalid Ethiopian phone number: " + phone);
         }
 
@@ -62,7 +70,7 @@ public class PhoneValidator {
     }
 
     public static boolean hasValidCountryCode(final String phone) {
-        if (!isValid(phone)) {
+        if (isNotValid(phone)) {
             return false;
         }
 
@@ -79,21 +87,17 @@ public class PhoneValidator {
      * @return The carrier prefix (7 or 9)
      * @throws IllegalArgumentException if the phone number is invalid
      */
-    public static String getCarrierPrefix(final String phone) {
-        if (!isValid(phone)) {
-            throw new IllegalArgumentException("Invalid Ethiopian phone number: " + phone);
+    public static String getCarrierPrefix(final String phone) throws SdkException {
+        if (isNotValid(phone)) {
+            throw SdkExceptionSupplier.INVALID_PHONE_NUMBER.get();
         }
 
         String normalized = normalize(phone);
         if (normalized.startsWith("+251") || normalized.startsWith("251")) {
-            return normalized.substring(3, 4);
+            return normalized.substring(4, 5);
         } else if (normalized.startsWith("0")) {
             return normalized.substring(1, 2);
         }
         return "";
-    }
-
-    private PhoneValidator() {
-        //
     }
 }

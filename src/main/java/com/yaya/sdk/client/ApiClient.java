@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yaya.sdk.config.ApiConfig;
 import com.yaya.sdk.config.ErrorResponse;
-import com.yaya.sdk.exceptions.ApiException;
+import com.yaya.sdk.exceptions.SdkException;
 import com.yaya.sdk.models.Time;
 
 import javax.crypto.Mac;
@@ -27,13 +27,8 @@ import java.util.stream.Collectors;
 
 public class ApiClient {
 
-    public enum HttpMethod {
-        GET, POST, PUT, DELETE
-    }
-
     private static final String HMAC_ALGORITHM = "HmacSHA256";
     private static final String CONTENT_TYPE = "application/json";
-
     private final String apiUrl;
     private final String apiPath;
     private final String apiKey;
@@ -58,66 +53,53 @@ public class ApiClient {
                              String path,
                              Map<String, String> queryParams,
                              Object body,
-                             Class<T> responseType,
-                             String errorMessage) throws ApiException {
-        try {
-            String url = buildUrl(path, queryParams);
-            String jsonBody = serializeBody(body);
-            Time serverTime = getServerTime();
+                             Class<T> responseType) throws Exception {
+        String url = buildUrl(path, queryParams);
+        String jsonBody = serializeBody(body);
+        Time serverTime = getServerTime();
 
-            HttpRequest request = buildRequest(method, url, serverTime.getTime(), path, jsonBody);
-            HttpResponse<String> response = executeRequest(request);
+        HttpRequest request = buildRequest(method, url, serverTime.getTime(), path, jsonBody);
+        HttpResponse<String> response = executeRequest(request);
 
-            return deserializeResponse(response, responseType);
-        } catch (Exception e) {
-            throw new ApiException(errorMessage, e);
-        }
+        return deserializeResponse(response, responseType);
     }
 
-    private Time getServerTime() throws ApiException {
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(apiUrl + "/time"))
-                    .header("Content-Type", CONTENT_TYPE)
-                    .GET()
-                    .build();
+    private Time getServerTime() throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(apiUrl + "/time"))
+                .header("Content-Type", CONTENT_TYPE)
+                .GET()
+                .build();
 
-            HttpResponse<String> response = executeRequest(request);
-            return objectMapper.readValue(response.body(), Time.class);
-        } catch (Exception e) {
-            throw new ApiException("Failed to fetch server time", e);
-        }
+        HttpResponse<String> response = executeRequest(request);
+        return objectMapper.readValue(response.body(), Time.class);
     }
 
     private HttpRequest buildRequest(HttpMethod method,
                                      String url,
                                      long timestamp,
                                      String path,
-                                     String jsonBody) throws ApiException {
-        try {
-            String signature = generateSignature(timestamp, method.name(), apiPath + path, jsonBody);
+                                     String jsonBody) throws Exception {
+        String signature = generateSignature(timestamp, method.name(), apiPath + path, jsonBody);
 
-            HttpRequest.Builder builder = HttpRequest.newBuilder()
-                    .uri(URI.create(url))
-                    .header("Content-Type", CONTENT_TYPE)
-                    .header("YAYA-API-KEY", apiKey)
-                    .header("YAYA-API-TIMESTAMP", String.valueOf(timestamp))
-                    .header("YAYA-API-SIGN", signature);
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", CONTENT_TYPE)
+                .header("YAYA-API-KEY", apiKey)
+                .header("YAYA-API-TIMESTAMP", String.valueOf(timestamp))
+                .header("YAYA-API-SIGN", signature);
 
-            switch (method) {
-                case GET:
-                    return builder.GET().build();
-                case POST:
-                    return builder.POST(HttpRequest.BodyPublishers.ofString(jsonBody, StandardCharsets.UTF_8)).build();
-                case PUT:
-                    return builder.PUT(HttpRequest.BodyPublishers.ofString(jsonBody, StandardCharsets.UTF_8)).build();
-                case DELETE:
-                    return builder.DELETE().build();
-                default:
-                    throw new IllegalArgumentException("Unsupported HTTP method: " + method);
-            }
-        } catch (Exception e) {
-            throw new ApiException("Failed to build request", e);
+        switch (method) {
+            case GET:
+                return builder.GET().build();
+            case POST:
+                return builder.POST(HttpRequest.BodyPublishers.ofString(jsonBody, StandardCharsets.UTF_8)).build();
+            case PUT:
+                return builder.PUT(HttpRequest.BodyPublishers.ofString(jsonBody, StandardCharsets.UTF_8)).build();
+            case DELETE:
+                return builder.DELETE().build();
+            default:
+                throw new IllegalArgumentException("Unsupported HTTP method: " + method);
         }
     }
 
@@ -148,16 +130,20 @@ public class ApiClient {
         return body != null ? objectMapper.writeValueAsString(body) : "";
     }
 
-    private <T> T deserializeResponse(HttpResponse<String> response, Class<T> responseType) throws IOException, ApiException {
+    private <T> T deserializeResponse(HttpResponse<String> response, Class<T> responseType) throws IOException, SdkException {
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
             ErrorResponse error = objectMapper.readValue(response.body(), ErrorResponse.class);
-            throw new ApiException(error.getMessage(), response.statusCode());
+            throw new SdkException(response.statusCode(), error.getMessage());
         }
         return responseType != null ? objectMapper.readValue(response.body(), responseType) : null;
     }
 
     private HttpResponse<String> executeRequest(HttpRequest request) throws IOException, InterruptedException {
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public enum HttpMethod {
+        GET, POST, PUT, DELETE
     }
 }
 
